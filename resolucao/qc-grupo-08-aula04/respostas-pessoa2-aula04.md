@@ -51,7 +51,7 @@ review["texto"] (Cosmos)
         │  entidades [{text, category, confidence}]
         ▼
         │  Passo 4 — Extractive Summarization (begin_analyze_actions)
-        │  só para reviews > 300 chars → ExtractiveSummarizationAction(max_sentence_count=1)
+        │  só para reviews > 300 chars → ExtractiveSummaryAction(max_sentence_count=1)
         ▼
         Cosmos upsert: schema completo com processado_em
 ```
@@ -111,7 +111,7 @@ idx_longos = [i for i, t in enumerate(textos) if len(t) > 300]
 if idx_longos:
     poller = ta.begin_analyze_actions(
         [textos_redacted[i] for i in idx_longos],
-        actions=[ExtractiveSummarizationAction(max_sentence_count=1)],
+        actions=[ExtractiveSummaryAction(max_sentence_count=1)],
         language="pt",
     )
     summ_results = [doc for page in poller.result() for doc in page]

@@ -34,7 +34,7 @@ from datetime import datetime, timezone
 
 import azure.cognitiveservices.speech as speechsdk
 import azure.functions as func
-from azure.ai.textanalytics import ExtractiveSummarizationAction, TextAnalyticsClient
+from azure.ai.textanalytics import ExtractiveSummaryAction, TextAnalyticsClient
 from azure.ai.vision.imageanalysis import ImageAnalysisClient
 from azure.ai.vision.imageanalysis.models import VisualFeatures
 from azure.cosmos import CosmosClient
@@ -218,7 +218,7 @@ def analisar_reviews(req: func.HttpRequest) -> func.HttpResponse:
             docs_longos = [textos_redacted[i] for i in idx_longos]
             poller = ta.begin_analyze_actions(
                 docs_longos,
-                actions=[ExtractiveSummarizationAction(max_sentence_count=1)],
+                actions=[ExtractiveSummaryAction(max_sentence_count=1)],
                 language="pt",
             )
             # flatten pages → um item por documento
