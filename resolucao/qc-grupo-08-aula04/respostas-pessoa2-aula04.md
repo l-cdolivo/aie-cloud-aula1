@@ -354,7 +354,11 @@ Essa estratégia mantém o índice vetorial sempre atualizado com custo proporci
 
 ---
 
-## Reflexão (contribuição da Pessoa 2)
+> **Nota:** algumas etapas de execução desta entrega não puderam ser validadas ao vivo por indisponibilidade de infraestrutura durante a aula. O código, os scripts e o terraform foram revisados e validados localmente; os exemplos de output presentes neste documento representam o comportamento esperado com base na documentação dos SDKs utilizados.
+
+---
+
+## Reflexão
 
 O exercício 2.1 deixa clara a **hierarquia de responsabilidades** entre as APIs cognitivas: o PII Detection não é opcional — ele é pré-condição técnica e legal para qualquer outro processamento de texto do usuário. A ordem importa: redigir primeiro, analisar depois. O opinion mining entrega algo que o sentimento simples não consegue: **granularidade de aspecto**, que é o que a equipe de produto da QC realmente precisa (saber que "entrega" é negativa mas "produto" é positivo em uma review "mixed" muda a decisão de ação).
 
