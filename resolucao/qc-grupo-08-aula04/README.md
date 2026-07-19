@@ -27,28 +27,45 @@ pip install --user \
 
 ## Pré-requisitos — Terraform da Aula 4
 
-Os scripts precisam dos recursos Azure provisionados. Copie o `cognitive.tf`
-desta entrega para a pasta do Terraform da Aula 4 e aplique:
+Os scripts precisam dos recursos Azure já provisionados pelo terraform da Aula 4.
+A pasta `terraform/` desta entrega é **standalone** — roda de onde está,
+sem precisar copiar nada para a pasta do lab.
+
+### 1. Obter variáveis do terraform da Aula 4
 
 ```bash
-# No Cloud Shell, dentro do repo clonado
 cd aulas/04-servicos-cognitivos/lab/terraform
-cp ../../../../resolucao/qc-grupo-08-aula04/terraform/cognitive.tf .
+
+export TF_VAR_resource_group_name=$(terraform output -raw resource_group_name)
+export TF_VAR_function_app_name=$(terraform output -raw function_app_name)
+export TF_VAR_sufixo=$(terraform output -raw sufixo)
+
+# Para os scripts Python
+export AI_ENDPOINT=$(terraform output -raw ai_endpoint)
+export COSMOS_ACCOUNT_AULA2=$(terraform output -raw cosmos_account_name)
+```
+
+### 2. Aplicar o terraform desta entrega (provisiona Azure OpenAI)
+
+```bash
+cd resolucao/qc-grupo-08-aula04/terraform
 terraform init
 terraform apply
 ```
 
-Salve os outputs — você vai exportá-los como variáveis de ambiente:
-```bash
-# Aula 4
-export AI_ENDPOINT=$(terraform output -raw ai_endpoint)
-export COSMOS_ACCOUNT_AULA2=$(terraform output -raw cosmos_account_name)
-export AZURE_OPENAI_ENDPOINT=$(terraform output -raw openai_endpoint)
+### 3. Exportar o endpoint do OpenAI
 
-# Aula 2 (use o terraform da pasta da Aula 2, ou copie manualmente)
-export STORAGE_ACCOUNT_NAME="<storage da Aula 2>"
-export COSMOS_ENDPOINT="https://<cosmos da Aula 2>.documents.azure.com"
-export SEARCH_ENDPOINT="<search endpoint da Aula 2>"
+```bash
+export AZURE_OPENAI_ENDPOINT=$(terraform output -raw openai_endpoint)
+```
+
+### 4. Variáveis da Aula 2
+
+```bash
+cd aulas/02-storage-bancos/lab/terraform
+export STORAGE_ACCOUNT_NAME=$(terraform output -raw storage_account_name)
+export COSMOS_ENDPOINT=$(terraform output -raw cosmos_endpoint)
+export SEARCH_ENDPOINT=$(terraform output -raw search_endpoint)
 ```
 
 ---
