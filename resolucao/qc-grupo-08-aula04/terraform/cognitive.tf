@@ -8,14 +8,14 @@
 
 # ── Conta Azure OpenAI ────────────────────────────────────────────────────────
 resource "azurerm_cognitive_account" "openai" {
-  name                = "openai-qc-${var.sufixo}"
+  name                = "openai-qc-${random_string.sufixo.result}"
   location            = var.openai_location
   resource_group_name = data.azurerm_resource_group.rg.name
   kind                = "OpenAI"
   sku_name            = "S0"
 
   # custom_subdomain obrigatório para autenticação via Managed Identity (Ex. 1.3)
-  custom_subdomain_name = "openai-qc-${var.sufixo}"
+  custom_subdomain_name = "openai-qc-${random_string.sufixo.result}"
 }
 
 # ── Deployment: text-embedding-3-small (N3 3.1 — Pessoa 2) ───────────────────

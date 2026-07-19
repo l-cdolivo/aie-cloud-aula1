@@ -17,6 +17,13 @@ provider "azurerm" {
 
 data "azurerm_client_config" "current" {}
 
+# Sufixo próprio para nomear o recurso OpenAI
+resource "random_string" "sufixo" {
+  length  = 6
+  upper   = false
+  special = false
+}
+
 # RG e Function App já existem — criados pelo terraform da Aula 4
 data "azurerm_resource_group" "rg" {
   name = var.resource_group_name
