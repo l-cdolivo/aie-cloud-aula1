@@ -33,11 +33,8 @@ resource "azurerm_mssql_firewall_rule" "cloud_shell" {
 # Azure SQL Database FREE OFFER
 # 100k vCore-seconds/mês + 32GB grátis. Auto-pausa quando inativo.
 resource "azurerm_mssql_database" "qc" {
-  name                           = "sqldb-qc"
-  server_id                      = azurerm_mssql_server.qc.id
-  sku_name                    = "GP_S_Gen5_2"
-  auto_pause_delay_in_minutes = 60
-  min_capacity                   = 0.5
-  max_size_gb                    = 32
-  tags                           = local.tags
+  name      = "sqldb-qc"
+  server_id = azurerm_mssql_server.qc.id
+  sku_name  = "Basic"
+  tags      = local.tags
 }

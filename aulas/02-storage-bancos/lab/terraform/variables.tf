@@ -1,7 +1,7 @@
 variable "location" {
   description = "Região do Azure onde os recursos serão provisionados"
   type        = string
-  default     = "eastus2"
+  default     = "canadacentral"
 }
 
 variable "sql_admin_password" {
